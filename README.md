@@ -1,24 +1,24 @@
-# Eth-Sig-Util [![CircleCI](https://circleci.com/gh/MetaMask/eth-sig-util.svg?style=svg)](https://circleci.com/gh/MetaMask/eth-sig-util)
+# Irc-Sig-Util [![CircleCI](https://circleci.com/gh/AuraMask/irc-sig-util.svg?style=svg)](https://circleci.com/gh/AuraMask/irc-sig-util)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/MetaMask/eth-sig-util.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/AuraMask/irc-sig-util.svg)](https://greenkeeper.io/)
 
-A small collection of ethereum signing functions.
+A small collection of irchain signing functions.
 
-You can find usage examples [here](https://github.com/flyswatter/js-eth-personal-sign-examples) 
+You can find usage examples [here](https://github.com/flyswatter/js-irc-personal-sign-examples)
 
-[Available on NPM](https://www.npmjs.com/package/eth-sig-util)
+[Available on NPM](https://www.npmjs.com/package/irc-sig-util)
 
 ## Supported Signing Methods
 
 Currently there is only one supported signing protocol. More will be added as standardized. 
 
-- Personal Sign (`personal_sign`) [geth thread](https://github.com/ethereum/go-ethereum/pull/2940)
+- Personal Sign (`personal_sign`) [girc thread](https://github.com/irchain/go-irchain/pull/2940)
 
 
 ## Installation
 
 ```
-npm install eth-sig-util --save
+npm install irc-sig-util --save
 ```
 
 ## Methods
@@ -31,13 +31,13 @@ Returns a continuous, hex-prefixed hex value for the signature, suitable for inc
 
 ### normalize(address)
 
-Takes an address of either upper or lower case, with or without a hex prefix, and returns an all-lowercase, hex-prefixed address, suitable for submitting to an ethereum provider.
+Takes an address of either upper or lower case, with or without a hex prefix, and returns an all-lowercase, hex-prefixed address, suitable for submitting to an irchain provider.
 
 ### personalSign (privateKeyBuffer, msgParams)
 
 msgParams should have a `data` key that is hex-encoded data to sign.
 
-Returns the prefixed signature expected for calls to `eth.personalSign`.
+Returns the prefixed signature expected for calls to `irc.personalSign`.
 
 ### recoverPersonalSignature (msgParams)
 
@@ -47,7 +47,7 @@ Returns a hex-encoded sender address.
 
 ### signTypedData (privateKeyBuffer, msgParams)
 
-Signs typed data as per [EIP712](https://github.com/ethereum/EIPs/pull/712).
+Signs typed data as per [EIP712](https://github.com/irchain/EIPs/pull/712).
 
 Data should be under `data` key of `msgParams`. The method returns prefixed signature.
 
@@ -59,7 +59,7 @@ Expects the same data that were used for signing. `sig` is a prefixed signature.
 
 ### typedSignatureHash (typedData)
 
-Return hex-encoded hash of typed data params according to [EIP712](https://github.com/ethereum/EIPs/pull/712) schema.
+Return hex-encoded hash of typed data params according to [EIP712](https://github.com/irchain/EIPs/pull/712) schema.
 
 ### extractPublicKey (msgParams)
 

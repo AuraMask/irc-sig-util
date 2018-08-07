@@ -1,30 +1,33 @@
 {
-  "name": "eth-sig-util",
-  "version": "2.0.2",
-  "description": "A few useful functions for signing ethereum data",
+  "name": "irc-sig-util",
+  "version": "0.0.1",
+  "description": "A few useful functions for signing irchain data",
   "main": "index.js",
   "scripts": {
     "test": "node test/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/MetaMask/eth-sig-util.git"
+    "url": "git+https://github.com/AuraMask/irc-sig-util.git"
   },
   "keywords": [
-    "ethereum",
+    "irchain",
     "signature"
   ],
   "author": "Dan Finlay",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MetaMask/eth-sig-util/issues"
+    "url": "https://github.com/AuraMask/irc-sig-util/issues"
   },
-  "homepage": "https://github.com/MetaMask/eth-sig-util#readme",
+  "homepage": "https://github.com/AuraMask/irc-sig-util#readme",
   "dependencies": {
-    "ethereumjs-abi": "0.6.5",
-    "ethereumjs-util": "^5.1.1"
+    "icjs-abi": "^0.0.1",
+    "icjs-util": "^0.0.1"
   },
   "devDependencies": {
     "tape": "^4.9.1"
+  },
+  "directories": {
+    "test": "test"
   }
 }
