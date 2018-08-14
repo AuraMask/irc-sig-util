@@ -1,6 +1,6 @@
 {
   "name": "irc-sig-util",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A few useful functions for signing irchain data",
   "main": "index.js",
   "scripts": {
