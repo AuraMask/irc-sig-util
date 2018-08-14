@@ -81,8 +81,7 @@ test('personalSign and recover', function(t) {
   const message = 'Hello, world!';
   const msgParams = {data: message};
 
-  const signed = sigUtil.personalSign(privKey, msgParams);
-  msgParams.sig = signed;
+  msgParams.sig = sigUtil.personalSign(privKey, msgParams);
   const recovered = sigUtil.recoverPersonalSignature(msgParams);
 
   t.equal(recovered, address);
@@ -97,8 +96,7 @@ test('personalSign and extractPublicKey', function(t) {
   const message = 'Hello, world!';
   const msgParams = {data: message};
 
-  const signed = sigUtil.personalSign(privKey, msgParams);
-  msgParams.sig = signed;
+  msgParams.sig = sigUtil.personalSign(privKey, msgParams);
   const publicKey = sigUtil.extractPublicKey(msgParams);
 
   t.equal(publicKey, pubKeyHex);
@@ -331,12 +329,14 @@ test('signedTypeData', (t) => {
       '0xc52c0ee5d84264471806290a3f2c4cecfc5490626bf912d01f240d7a274b371e');
   t.equal(
       ircUtil.bufferToHex(utils.hashStruct('EIP712Domain', typedData.domain, typedData.types)),
-      '0xf2cee375fa42b42143804025fc449deafd50cc031ca257e0b194a650a912090f');
+      '0xc3733dae10ed3d91c692071d213780465aba23be0cf79e5a693dd00503decea7');
   t.equal(
       ircUtil.bufferToHex(utils.sign(typedData)),
-      '0xbe609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2');
-  t.equal(ircUtil.bufferToHex(address), '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826');
+      '0xed175b0a0f538ae2ec8d0f18e2a1aeacbfb9ac73077403ab2948ce78314f18ac');
+  t.equal(
+      ircUtil.bufferToHex(address),
+      '0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826');
   t.equal(
       sig,
-      '0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c');
+      '0xa773f7bc155a157b35910ae123d6bb556f0b8af37a4f1722e29a6e303b685e835fe7be854e747a1dc0aacd78527aa62d08c408ef57623db66674920021a2cb931c');
 });

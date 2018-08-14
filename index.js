@@ -53,7 +53,10 @@ const TypedDataUtils = {
           value = ircUtil.sha3(this.encodeData(field.type, value, types));
           encodedValues.push(value);
         } else if (field.type.lastIndexOf(']') === field.type.length - 1) {
-          throw new Error('Arrays currently unimplemented in encodeData');
+          encodedTypes.push('bytes32');
+          const parsedType = field.type.slice(0, field.type.lastIndexOf('['));
+          value = ircUtil.sha3(value.map(item => this.encodeData(parsedType, item, types)).join(''));
+          encodedValues.push(value);
         } else {
           encodedTypes.push(field.type);
           encodedValues.push(value);
@@ -110,7 +113,7 @@ const TypedDataUtils = {
    * @param {string} primaryType - Root type
    * @param {Object} data - Object to hash
    * @param {Object} types - Type definitions
-   * @returns {string} - Hash of an object
+   * @returns {Buffer} - Hash of an object
    */
   hashStruct(primaryType, data, types) {
     return ircUtil.sha3(this.encodeData(primaryType, data, types));
@@ -121,7 +124,7 @@ const TypedDataUtils = {
    *
    * @param {string} primaryType - Root type to hash
    * @param {Object} types - Type definitions
-   * @returns {string} - Hash of an object
+   * @returns {Buffer} - Hash of an object
    */
   hashType(primaryType, types) {
     return ircUtil.sha3(this.encodeType(primaryType, types));
@@ -138,6 +141,9 @@ const TypedDataUtils = {
     for (const key in TYPED_MESSAGE_SCHEMA.properties) {
       data[key] && (sanitizedData[key] = data[key]);
     }
+    if (sanitizedData.types) {
+      sanitizedData.types = Object.assign({ EIP712Domain: [] }, sanitizedData.types)
+    }
     return sanitizedData;
   },
 
@@ -145,10 +151,10 @@ const TypedDataUtils = {
    * Signs a typed message as per EIP-712 and returns its sha3 hash
    *
    * @param {Object} typedData - Types message data to sign
-   * @returns {string} - sha3 hash of the resulting signed message
+   * @returns {Buffer} - sha3 hash of the resulting signed message
    */
   sign(typedData) {
-    sanitizedData = this.sanitizeData(typedData);
+    const sanitizedData = this.sanitizeData(typedData);
     const parts = [Buffer.from('1901', 'hex')];
     parts.push(this.hashStruct('EIP712Domain', sanitizedData.domain, sanitizedData.types));
     parts.push(this.hashStruct(sanitizedData.primaryType, sanitizedData.message, sanitizedData.types));
